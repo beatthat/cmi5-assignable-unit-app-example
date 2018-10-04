@@ -1,2 +1,35 @@
 # cmi5-assignable-unit-app-example
 An example CMI5 assignable unit that connects to an LMS (the XAPI backend of an LMS) and reads/writes an xapi statement
+
+## USAGE
+
+...this is a temporarily valid URL for initial test (includes a nonced access_token)
+
+
+http://dev-pal.ict.usc.edu/cmi5/?fetch=http://dev-pal.ict.usc.edu/api/1.0/cmi5/accesstoken2basictoken?access_token=eb080ab0-c803-11e8-b689-5600102c2c26&endpoint=http://dev-pal.ict.usc.edu/api/1.0/cmi5/&activityId=http://pal.ict.usc.edu/activities/claire-the-counselor&registration=957f56b7-1d34-4b01-9408-3ffeb2053b28&actor={%22objectType%22:%20%22Agent%22,%22name%22:%20%22clairelearner1%22,%22account%22:%20{%22homePage%22:%20%22http://pal.ict.usc.edu/xapi/users%22,%22name%22:%20%225bb65cdad7bd5600102c2c26%22}}
+
+...using the above or a newly constructed valid url (see below for breakdown of how to construct a url), the following scenario is supported:
+
+#### SCENARIO:
+
+**User changes their 'commitment' level, and on subsequent visit, sees that their last saved 'commitment' level is preset**()
+
+* Load the a index.html with valid cmi5 params in a browser
+* The page should give feedback that it is first initializing cmi5 and then looking up saved ‘commitment’ state from XAPI endpoints
+* The page should present radio options for commitment and a save button
+* If you change commitment and then refresh the page, it should have the last-selected radio option checked
+
+## CMI5 url params / constructing a valid url
+
+See the [cmi5 spec](https://github.com/AICC/CMI-5_Spec_Current/blob/quartz/cmi5_spec.md#81-launch-method) for details about 'LMS launches Assignable Unit' launch urls
+
+In a production deployment, the LMS will launch the AU app providing valid values for all of the required params in the spec.
+
+## Included files in the example
+
+* cmi5.js - this is a Assignable Unit client library developed by Rustici software. You will need to include this in your own AU
+* index.html - this is the full html code and js for the app-specific parts of this example
+
+#### NOTE on the all-in-one structure of index.html
+
+It would be better if this example were a template of a modern approach to building a web app, e.g. browserify or webpack. It turned out to be difficult to browserify the example because Rustici has taken down the source code for their cmi5.js lib from public github. The cmi5.js we have is taken from [this npm package](https://www.npmjs.com/package/cmi5.js) but the package includes only the already bundles cmi5.js file, not the source.  

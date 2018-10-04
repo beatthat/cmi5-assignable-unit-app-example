@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="cmi5.js"></script>
+</head>
+<body>
+  <div id="loading">
+    loading...
+  </div>
+  <div id="ready">
+    <div>
+      <input type="radio" id="r1" name="commitment" value="1" checked />
+      <label for="r1">Low</label>
+    </div>
+    <div>
+      <input type="radio" id="r2" name="commitment" value="2" checked />
+      <label for="r2">Medium</label>
+    </div>
+    <div>
+      <input type="radio" id="r3" name="commitment" value="3" checked />
+      <label for="r3">High</label>
+    </div>
+    <div>
+      <button type="button" id="savebutton">save</button>
+    </div>
+  </div>
+  <script type="text/javascript">
+    console.log('will enable debug...')
+    Cmi5.enableDebug(true)
+    const cmi = new Cmi5(location.href)
+
+    $("#loading").html("initializing cmi5...")
+    $("#loading").show()
+    $("#ready").hide()
+
+    const findExistingRecordsForActivityId = function(params, callback) {
+      if(typeof(params) === 'function') {
+        callback = params
+      }
+
+      params = params || {}
+      params["agent"] = cmi.getActor()
+      params["activity"] = cmi.getActivity()
+
+      cmi.getLRS().queryStatements(
+        {
+          params: params,
+          callback: callback
+        }
+      )
+    }
+
+    const findSavedCommitment = function(callback) {
+      findExistingRecordsForActivityId(
+        {
+          verb: "http://adlnet.gov/expapi/verbs/passed"
+        },
+        function(err, sr) {
+          if(err) {
+            return callback(err)
+          }
+
+          if(sr === null || !Array.isArray(sr.statements) || sr.statements.length === 0) {
+            return callback() // nothing saved
+          }
+
+          // sr.sort(function(a, b) { return a.stored > b.stored? -1: 1 })
+
+          const last = sr.statements[0]
+
+          // console.log(`found commitment statement ${JSON.stringify(last)}`)
+
+          const commitment = last.result !== null && last.result.score !== null?
+            last.result.score.raw: null
+
+          return callback(null, commitment)
+        }
+      )
+    }
+
+    cmi.start(function(err, result) {
+      if(err) {
+        console.error(`${err.message}\n${err.stack}`)
+        $("#loading").html(`${err.message}\n${err.stack}`)
+        return
+      }
+
+      $("#loading").html("checking last saved...")
+      findSavedCommitment(function(err, commitment) {
+
+        console.log(`found commitment ${commitment}`)
+        if(commitment !== null) {
+          $(`#r${Math.floor(commitment)}`).prop("checked", true);
+        }
+
+        $("#loading").hide()
+        $("#ready").show()
+
+        $("#savebutton").click(function() {
+          const commitment = $('input[name=commitment]:checked').val()
+
+          console.log(`commitment=${commitment}`)
+          cmi.passed({
+            min: 1,
+            max: 3,
+            raw: Number(commitment)
+          })
+        })
+      })
+    })
+  </script>
+</body>
+</html>

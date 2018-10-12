@@ -30,7 +30,7 @@ In a production deployment, the LMS will launch the AU app providing valid value
 * cmi5.js - this is a Assignable Unit client library developed by Rustici software. You will need to include this in your own AU
 * index.html - this is the full html code and js for the app-specific parts of this example
 
-## A very paired down version of the example
+## A very pared down version of the example
 
 ```html
 <html>

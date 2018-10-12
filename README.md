@@ -80,7 +80,7 @@ In a production deployment, the LMS will launch the AU app providing valid value
 
 #### NOTE on the all-in-one structure of index.html
 
-It would be better if this example were a template of a modern approach to building a web app, e.g. browserify or webpack. It turned out to be difficult to browserify the example because Rustici has taken down the source code for their cmi5.js lib from public github. The cmi5.js we have is taken from [this npm package](https://www.npmjs.com/package/cmi5.js) but the package includes only the already bundles cmi5.js file, not the source.
+It would be better if this example were a template of a modern approach to building a web app, e.g. browserify or webpack. It turned out to be difficult to browserify the example because Rustici has taken down the source code for their cmi5.js lib from public github. The cmi5.js we have is taken from [this npm package](https://www.npmjs.com/package/cmi5.js) but the package includes only the already bundled cmi5.js file, not the source.
 
 #### NOTE on the use of the 'passed' verb
 

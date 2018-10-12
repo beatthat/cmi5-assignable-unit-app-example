@@ -30,6 +30,54 @@ In a production deployment, the LMS will launch the AU app providing valid value
 * cmi5.js - this is a Assignable Unit client library developed by Rustici software. You will need to include this in your own AU
 * index.html - this is the full html code and js for the app-specific parts of this example
 
+## A very paired down version of the example
+
+```html
+<html>
+<head>
+  <!-- include the cmi5.js lib -->
+  <script type="text/javascript" src="cmi5.js"></script>
+</head>
+<body>
+  <script type="text/javascript">
+    // create a CMI5 instance with the loaded url
+    //(will parse all the cmi query params)
+    // in a real-world example, maybe check for cmi params and
+    // don't bother to do any of the below if the caller isn't using cmi
+    const cmi = new Cmi5(location.href)
+
+    // call Cmi5::start and then wait for callback
+    cmi.start(function(err, result) {
+      if(err) {
+        // if cmi failed, there won't be a connection
+        return
+      }
+
+      // if you want to load previous xapi statements you can do that here.
+      // index.html has an example of this
+
+      // when/where you are ready to send a result,
+      // you can use the Cmi5 instance
+      // to send one of the standard cmi verbs, e.g. passed
+      // NOTE: this should NOT be happening automatically on callback from cmi::start
+      cmi.passed({
+        min: 1,
+        max: 6,
+        raw: Number(commitment)
+      })
+
+      // ...or if you prefer to store other types of xapi statements
+      // (not the standard cmi verbs), use cmi.getLRS(),
+      // which returns an instance of TinCan.getLRS
+      // @see http://rusticisoftware.github.io/TinCanJS/doc/api/latest/classes/TinCan.LRS.html
+    })
+  </script>
+</body>
+</html>
+
+
+```
+
 #### NOTE on the all-in-one structure of index.html
 
 It would be better if this example were a template of a modern approach to building a web app, e.g. browserify or webpack. It turned out to be difficult to browserify the example because Rustici has taken down the source code for their cmi5.js lib from public github. The cmi5.js we have is taken from [this npm package](https://www.npmjs.com/package/cmi5.js) but the package includes only the already bundles cmi5.js file, not the source.

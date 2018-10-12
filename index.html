@@ -1,28 +1,48 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="cmi5.js"></script>
 </head>
 <body>
-  <div id="loading">
-    loading...
-  </div>
-  <div id="ready">
-    <div>
-      <input type="radio" id="r1" name="commitment" value="1" checked />
-      <label for="r1">Low</label>
+  <div class="container">
+    <div id="loading" class="row">
+      loading...
     </div>
-    <div>
-      <input type="radio" id="r2" name="commitment" value="2" checked />
-      <label for="r2">Medium</label>
-    </div>
-    <div>
-      <input type="radio" id="r3" name="commitment" value="3" checked />
-      <label for="r3">High</label>
-    </div>
-    <div>
-      <button type="button" id="savebutton">save</button>
+    <div id="ready" class="row">
+      <div class="col-lg-1 col-md-1 col-sm-1">
+        <div class="form-group">
+          <input type="radio" id="r1" class="form-control" name="commitment" value="1" checked />
+          <label for="r1">Warm Up</label>
+        </div>
+        <div class="form-group">
+          <input type="radio" id="r2" class="form-control" name="commitment" value="2" checked />
+          <label for="r2">Casual</label>
+        </div>
+        <div class="form-group">
+          <input type="radio" id="r3" class="form-control" name="commitment" value="3" checked />
+          <label for="r3">Active</label>
+        </div>
+        <div class="form-group">
+          <input type="radio" id="r4" class="form-control" name="commitment" value="4" checked />
+          <label for="r4">Serious</label>
+        </div>
+        <div class="form-group">
+          <input type="radio" id="r5" class="form-control" name="commitment" value="5" checked />
+          <label for="r5">Hard Core</label>
+        </div>
+        <div class="form-group">
+          <input type="radio" id="r6" class="form-control" name="commitment" value="6" checked />
+          <label for="r6">Relentless</label>
+        </div>
+        <div class="form-group">
+          <button type="button" id="savebutton" class="btn">save</button>
+        </div>
+      </div>
     </div>
   </div>
   <script type="text/javascript">
@@ -103,7 +123,7 @@
           console.log(`commitment=${commitment}`)
           cmi.passed({
             min: 1,
-            max: 3,
+            max: 6,
             raw: Number(commitment)
           })
         })

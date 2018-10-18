@@ -25,7 +25,7 @@ See the [cmi5 spec](https://github.com/AICC/CMI-5_Spec_Current/blob/quartz/cmi5_
 
 In a production deployment, the LMS will launch the AU app providing valid values for all of the required params in the spec.
 
-#### Constructing your a (test) CMI url for your own app
+#### Constructing a (test) CMI url for your own Assignable Unit app
 
 The query params in the example url above can be applied to any CMI5 assignable-unit url and should work. Basically, they log you in as PAL3 user 'clairelearner1' (again for only as long as the access token remains valid).
 

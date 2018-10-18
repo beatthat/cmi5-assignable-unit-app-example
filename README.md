@@ -6,7 +6,7 @@ An example CMI5 assignable unit that connects to an LMS (the XAPI backend of an 
 ...this is a temporarily valid URL for initial test (includes a nonced access_token)
 
 
-http://dev-pal.ict.usc.edu/cmi5/?fetch=http://dev-pal.ict.usc.edu/api/1.0/cmi5/accesstoken2basictoken?access_token=eb080ab0-c803-11e8-b689-5600102c2c26&endpoint=http://dev-pal.ict.usc.edu/api/1.0/cmi5/&activityId=http://pal.ict.usc.edu/activities/claire-the-counselor&registration=957f56b7-1d34-4b01-9408-3ffeb2053b28&actor={%22objectType%22:%20%22Agent%22,%22name%22:%20%22clairelearner1%22,%22account%22:%20{%22homePage%22:%20%22http://pal.ict.usc.edu/xapi/users%22,%22name%22:%20%225bb65cdad7bd5600102c2c26%22}}
+http://dev-pal.ict.usc.edu/cmi5/?fetch=http://dev-pal.ict.usc.edu/api/1.0/cmi5/accesstoken2basictoken?access_token=f7720600-c756-11e8-93c1-bb00128e12bc&endpoint=http://dev-pal.ict.usc.edu/api/1.0/cmi5/&activityId=http://pal.ict.usc.edu/activities/claire-the-counselor&registration=957f56b7-1d34-4b01-9408-3ffeb2053b28&actor=%7B%22objectType%22:%20%22Agent%22,%22name%22:%20%22clairelearner1%22,%22account%22:%20%7B%22homePage%22:%20%22http://pal.ict.usc.edu/xapi/users%22,%22name%22:%20%225bb65cdad7bd5600102c2c26%22%7D%7D
 
 ...using the above or a newly constructed valid url (see below for breakdown of how to construct a url), the following scenario is supported:
 

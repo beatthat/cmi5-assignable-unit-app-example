@@ -1,6 +1,96 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# cmi5-assignable-unit-app-example
+An example CMI5 assignable unit that connects to an LMS (the XAPI backend of an LMS) and reads/writes an xapi statement
 
-## Available Scripts
+## USAGE
+
+For a quick test, run ```npm start``` to start react, and then adjust the example url to include valid cmi5 query params for an example user and activityId. The url below should be valid (unless the access_token for the user expired)
+
+http://localhost:3000/?fetch=http://qa-pal.ict.usc.edu/api/1.0/cmi5/accesstoken2basictoken?access_token=41c847e0-fccd-11e8-8b7f-cf001aed3365&endpoint=http://qa-pal.ict.usc.edu/api/1.0/cmi5/&activityId=http://pal.ict.usc.edu/lessons/cmi5-ex1&registration=957f56b7-1d34-4b01-9408-3ffeb2053b28&actor=%7B%22objectType%22:%20%22Agent%22,%22name%22:%20%22taflearner1%22,%22account%22:%20%7B%22homePage%22:%20%22http://pal.ict.usc.edu/xapi/users%22,%22name%22:%20%225c0eec7993c7cf001aed3365%22%7D%7D
+
+...using the above or a newly constructed valid url (see below for breakdown of how to construct a url), the following scenario is supported:
+
+## Integration in a React App
+
+To integrate this cmi5 implementation in a React app, you can use these steps:
+
+#### Include the cmi5.js lib
+
+Add the ```cmi5.js``` lib to your ```public``` folder, then include ```cmi5.js``` in your ```index.html```, e.g.
+
+```
+<head>
+  <script src="%PUBLIC_URL%/cmi5.js"></script>
+  <!--
+    Notice the use of %PUBLIC_URL% in the tags above.
+    It will be replaced with the URL of the `public` folder during the build.
+    Only files inside the `public` folder can be referenced from the HTML.
+
+    Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+    work correctly both with client-side routing and a non-root public URL.
+    Learn how to configure a non-root public URL by running `npm run build`.
+  -->
+</head>
+```
+
+#### Wrap a Question with Component Cmi5AssignableUnit
+
+Include ```Cmi5AssignableUnit.js``` in your src and wrap use it to wrap a question, e.g.
+
+```jsx
+import React, { Component } from 'react';
+import './App.css';
+import Cmi5AssignableUnit from './Cmi5AssignableUnit';
+import ExampleQuestion from './ExampleQuestion';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Cmi5AssignableUnit>
+          <ExampleQuestion/>
+        </Cmi5AssignableUnit>
+      </div>
+    )
+  }
+}
+
+export default App;
+```
+
+...then in your question component when you're ready to submit a result, call one of the injected property functions `passed` or `failed`, e.g.
+
+```
+import React, { Component } from 'react';
+
+export default class ExampleQuestion extends Component {
+  render()
+  {
+    // props includes special actions for passed({score:1.0}) and failed({score: 0.0 })
+    // These are wrappers for cmi.passed and cmi.failed
+    // that make sure cmi has initialized before score is actually sent
+    const {passed, failed} = this.props
+
+    const onSubmit = () => {
+      const score = this.state.score // score was set when user chose a radio-button answer
+      if(score > 0) {
+        this.props.passed(score)
+      }
+      else {
+        this.props.failed(score)
+      }
+    }
+
+    return (
+      <div>question form here</div>
+    )
+   }
+ }
+
+```
+
+## Node/React Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 

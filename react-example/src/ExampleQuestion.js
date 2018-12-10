@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+/**
+ * An example question that can be wrapped as a child of Cmi5AssignableUnit.
+ *
+ * The import piece to note is the use of the injected action properties
+ * 'passed' and 'failed', which the question can use to submit results.
+ */
 export default class ExampleQuestion extends Component {
 
   constructor(props) {
@@ -26,8 +32,9 @@ export default class ExampleQuestion extends Component {
     const {passed, failed} = this.props
 
     const onSubmit = () => {
-      console.log('ON SUBMIT!')
-      const score = this.state.score
+
+      const score = this.state.score // score was set when user chose a radio-button answer
+
       if(score > 0) {
         this.props.passed(score)
       }

@@ -81,7 +81,10 @@ export default class ExampleQuestion extends Component {
     }
 
     return (
-      <div>question form here</div>
+      <div>
+        question form here
+        <button onClick={onSubmit}>submit</button>
+      </div>
     )
    }
  }

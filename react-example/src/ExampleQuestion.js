@@ -41,6 +41,8 @@ export default class ExampleQuestion extends Component {
       else {
         this.props.failed(score)
       }
+
+      this.props.terminate()
     }
 
     return (

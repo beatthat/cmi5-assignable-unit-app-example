@@ -59,7 +59,7 @@ export default App;
 
 ...then in your question component when you're ready to submit a result, call one of the injected property functions `passed` or `failed`, e.g.
 
-```
+```jsx
 import React, { Component } from 'react';
 
 export default class ExampleQuestion extends Component {
@@ -78,6 +78,7 @@ export default class ExampleQuestion extends Component {
       else {
         this.props.failed(score)
       }
+      this.props.terminate() // MUST call terminate to end the session
     }
 
     return (
